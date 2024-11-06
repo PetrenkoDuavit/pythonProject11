@@ -10,6 +10,18 @@ def prime_generator(end):
         if is_prime:
             yield num  # Возвращаем простое число
 
+# HW 11.2
+
+def generate_cube_numbers(end):
+    startFrom = 2  # начало с 2-х
+    while True: # цикл заканчивается
+        numberInCube = startFrom ** 3  # приведение в 3ю степень
+        if numberInCube > end: # если чило в кубе больше end заверщаем проверку
+            break
+        yield numberInCube  # Возвращаем чило в кубе если оно меньше end
+        startFrom += 1  # проверяем следующее число
+
+
 
 
 # HW 11.3
@@ -29,9 +41,20 @@ from inspect import isgenerator
 gen = prime_generator(1)
 assert isgenerator(gen) == True, 'Test0'
 assert list(prime_generator(10)) == [2, 3, 5, 7], 'Test1'
-# assert list(prime_generator(15)) == [2, 3, 5, 7, 11, 13], 'Test2'
-# assert list(prime_generator(29)) == [2, 3, 5, 7, 11, 13, 17, 19, 23, 29], 'Test3'
+assert list(prime_generator(15)) == [2, 3, 5, 7, 11, 13], 'Test2'
+assert list(prime_generator(29)) == [2, 3, 5, 7, 11, 13, 17, 19, 23, 29], 'Test3'
 print('Ok')
+
+print("HW 11.2")
+
+from inspect import isgenerator
+
+gen = generate_cube_numbers(1)
+assert isgenerator(gen) == True, 'Test0'
+assert list(generate_cube_numbers(10)) == [8], 'оскільки воно менше 10.'
+assert list(generate_cube_numbers(100)) == [8, 27, 64], '5 у кубі це 125, а воно вже більше 100'
+assert list(generate_cube_numbers(1000)) == [8, 27, 64, 125, 216, 343, 512, 729, 1000], '10 у кубі це 1000'
+print('OK')
 
 
 print("HW 11.3")
